@@ -1,0 +1,3 @@
+Esercizio per casa
+
+Sistemare meglio tramite class relazione etc sul file esercizio della lezione 3 biblioteca

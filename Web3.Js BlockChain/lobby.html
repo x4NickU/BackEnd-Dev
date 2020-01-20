@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/	jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <!--
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+        <script src="node_modules/web3/dist/web3.min.js"></script>
+        
+    -->
+        <script src="http://code.dappbench.com/browser-solc.min.js"></script>
+        <script src="https://unpkg.com/bro-fs"></script>
+        <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+        <title id="lobbyTitle">Lobby</title>
+        <script type="text/javascript" src="Main.js"></script>
+</head>
+<body>
+    
+        <div class="container" style="text-align: center">
+                <div class="row">
+                    <div class="col-sm-5" style="background-color: #ecf0f1; border-radius: 40px;padding-bottom: 50px">
+                            <h5>Create Lobby</h5>
+                            
+                        
+                            <div class="form-group">
+                                <br><label for="sel1">Lobby Time:</label>
+                                <input type="text" style="width: 40%;margin-left: 30%" class="form-control" id="Time" placeholder="Time in seconds">
+                                <label for="sel1">Bet:</label>
+                                <input type="text" style="width: 40%;margin-left: 30%" class="form-control" id="Bet" placeholder="Bet">
+                                
+                                
+                                  <label for="sel1">Seleziona Player:</label>
+                                      <select class="form-control" id="selectPlayer" style="width: 40%;margin-left: 30%">
+                                        <option selected="selected">2</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                  </select>
+                            </div>
+                            <p>Dati Selezionati:</p>
+                            <p id="Check1"></p>
+                            <p id="Check2"></p>
+                            <p id="Check3"></p>
+                            <p id="Check4"></p>
+                            <p id="Check7"></p>
+                            <p id="Check9"></p>
+                            <button type="button" class="btn btn-default" onclick="takeDataLobby()">Avvia lobby</button>
+                        </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+Specifiche del committente
+
+
+La biblioteca contiene libri e riviste e, di ogni libro, si possono avere più copie. Ogni iscritto alla biblioteca,  può prendere in prestito per 15 giorni fino a 6 articoli contemporaneamente ma i dipendenti fino a 10 articoli. Le riviste si possono leggere in biblioteca e solo i dipendenti possono prenderle in prestito.
+Il sistema deve tener traccia del momento e del titolo dei libri e riviste prese in prestito e del momento della restituzione in base alle regole sopra descritte.
+
+Nota:
+Regola d’identificazione:
+•	per le classi identificare i nomi
+•	per gli attributi identificare gli aggettivi
+•	per le azioni identificare i verbi

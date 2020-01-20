@@ -1,0 +1,314 @@
+//GAS LIMITS//
+2592859 deploy
+112032 create acc
+TELIAGGIORNOABBREVE
+
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\
+ABI
+
+[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "pin",
+				"type": "uint256"
+			}
+		],
+		"name": "addUser",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "close",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "cap",
+				"type": "uint256"
+			},
+			{
+				"name": "timer",
+				"type": "uint256"
+			}
+		],
+		"name": "createRoom",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "pin",
+				"type": "uint256"
+			},
+			{
+				"name": "newPin",
+				"type": "uint256"
+			}
+		],
+		"name": "editUser",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "joinRoom",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "prn",
+				"type": "uint256"
+			},
+			{
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "sendPRN",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "percent",
+				"type": "uint8"
+			}
+		],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "constructor"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "pin",
+				"type": "uint256"
+			}
+		],
+		"name": "askPIN",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "getAccs",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getMyRoom",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getName",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getOpen",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "getRoom",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+address
+0xADA5B884dFC08E9D09F35D5ec76F9A73367b7379
+
+deployer
+0xbb101a5EEA6973693c475b4eF925dcad69373b90
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+FUNZIONI PUBBLICHE
+
+addUser(string NOME, uint PIN) {from:ANY}
+NOME<16    PIN<9999
+crea account (solo una volta)
+
+
+askPIN(uint PIN) {from:USER}
+PIN<9999
+se ti serve di chiedere ad un user di confermare l'identita'
+
+editUser(string NOMENUOVO, uint PIN, uint PINNUOVO) {from:USER}  
+NOMENUOVO<16    PIN<9999    PINNUOVO<9999
+se devi cambiare nome o mettere un nuovo pin
+
+createRoom(uint MAXPLAYER, uint TIMEOUT) {from:USER}
+2<=MAXPLAYER<=10       33<TIMEOUT<25200 (7 ore)
+per creare la stanza serve un user
+
+joinRoom(uint ID) {from:ANY value:COST}
+ID<L'ultimo ID generato per una stanza (da ora "Valido")
+il value e' quanto costa la stanza corrispondente all'ID passato
+
+sendPRN(uint PRN, uint ID) {from:CHI E' IN QUELLA STANZA}
+0<=PRN<=10	ID Valido
+invii il prn passandolo assieme all'id della stanza in cui sei fra i partecipanti
+
+close(uint ID) {from:USER}
+ID Valido
+chiude la stanza corrispondente all'id if requirements are met
+
+getOpen() {from:ANY}
+returns uint[]
+ti da un array indicizzato delle stanze aperte
+
+getRoom(uint ID {from:ANY}
+returns (COSTO,PLAYER-IN-ROOM,MAXPLAYER,TIMESTAMP,TIMER,STATUS)
+ti da le informazioni base di tutte le stanze (aperte o chiuse)
+
+getName() {from:USER}
+return string NAME
+ti da il nickname di un player registrato, di default e' una string ""
+
+getAccs(uint ID) {from:DEPLOYER}
+returns accounts[] of room at ID
+se passi la chiave di chi ha deployato il contratto (master?) ti dice chi e' o era nella stanza
+
+
+
+
+

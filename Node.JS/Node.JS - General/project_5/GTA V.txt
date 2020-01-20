@@ -1,0 +1,33 @@
+Only installed, need translation or other thing.
+
+ - [Release] Lightbar Menu Script: Attatch Lightbars to ANY vehicle w/ Sirens
+	
+ - [Release] esx_playtime
+
+ - [Release] Police Panic Resource
+
+ - [Release] Chair & Bed System - Sit/Lay
+
+ - [Release] [ESX] Pacific Standard robbery (goldbars or dirty money)
+
+ - [Release] Rgz_help - Help modal with info tabs
+
+ - [ESX] Crypto Customs Dealership Job
+
+ - [Release] [ESX] Character Selection
+
+ - [Release] Take Hostage
+
+ - [Release] [ESX] IRforCe Loot The Dead Corpse
+
+ - [RELEASE][ESX] esx_crafting
+
+ - [RELEASE] ESX/VRP Job Counter Display V2
+
+ - [Releases] ESX Notepad
+
+ - [RELEASE] [ESX] Documents
+
+ - [RELEASE] /delallveh, deletes all unoccupied vehicles on the map
+ 
+ - [RELEASE] Progress Bars 1.0 [STANDALONE]
