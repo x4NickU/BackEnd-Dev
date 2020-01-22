@@ -5,7 +5,7 @@ const passport = require('passport');
 
 router.get('/login',(req,res,next) => {
     const messages = req.flash();
-    res.render('index', {messages});
+    res.render('login', {messages});
 });
 
 router.post('/login', passport.authenticate('local',
