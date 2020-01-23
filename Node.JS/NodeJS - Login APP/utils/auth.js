@@ -1,13 +1,11 @@
-const bcrypto = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const hashPassword = (plainText) => {
-    return bcrypto.hashSync(plainText, 5);
+    return bcrypt.hashSync(plainText, 5);
+}
+const checkPassword = (myPlaintextPassword,hash) => {
+    return bcrypt.compareSync(myPlaintextPassword, hash);
 }
 
-const ifExistUsername = (username,users) => {
-    users.findOne({username: username}).then(res =>{
-        return res;
-    });
-}
 exports.hashPassword = hashPassword;
-exports.ifExistUsername = ifExistUsername;
+exports.checkPassword = checkPassword;

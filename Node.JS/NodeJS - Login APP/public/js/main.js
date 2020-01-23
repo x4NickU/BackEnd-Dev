@@ -31,9 +31,10 @@
         if($(input).attr('type') == 'username' || $(input).attr('name') == 'username') {
             if($(input).val().trim().match(/^[a-z0-9_@!-]{11,20}$/) == null) {
                 return true;
+            }else{
+                return false;
             }
-        }
-        else {
+        } else {
             if($(input).val().trim() == ''){
                 return false;
             }

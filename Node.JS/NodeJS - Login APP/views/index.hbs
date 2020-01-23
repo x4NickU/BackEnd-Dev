@@ -29,13 +29,11 @@
     <div class="container">
         <div class="header-container header">
             {{#loggedIn}}
-            <a href="/auth/logout">
-                <button class="header-btn">Logout</button>
-            </a>
+            <a class="navbar-item" href="/users/{{username}}">Account</a>
+            <a class="navbar-item" href="/auth/logout">Logout</a>
+            {{else}}
+            <a class="navbar-item" href="/auth/login">Register/Login</a>
             {{/loggedIn}}
-            <a href="/auth/login">
-                <button class="header-btn"> Login/Register</button>
-            </a>
             <div class="header-right">
                 <a class="navbar-item" href="#team">The Team</a>
                 <a class="navbar-item" href="#pricing">To do quiz</a>
@@ -65,49 +63,12 @@
     </div> <!--hero-container-->
 
 </div><!--hero-background-->
-
-
-<!-- Features
-  ================================================== -->
-
-<div id="features" class="features-section">
-
-    <div class="features-container row">
-
-        <h2 class="features-headline light">Quiz to do</h2>
-
-        <div class="col-sm-4 feature">
-
-            <div class="feature-icon feature-no-display">
-                <img class="feature-img" src="/assets/images/responsive.svg">
-            </div>
-            <h5 class="feature-head-text feature-no-display"> Python3 </h5>
-            <p class="feature-subtext light feature-no-display"> Try out a simple Python 3 Quiz now!.</p>
-        </div>
-
-        <div class="col-sm-4 feature">
-            <div class="feature-icon feature-no-display feature-display-mid">
-                <img class="feature-img" src="/assets/images/customizable.svg">
-            </div>
-            <h5 class="feature-head-text feature-no-display feature-display-mid"> JavaScript </h5>
-            <p class="feature-subtext light feature-no-display feature-display-mid"> Try out a simple JavaScript Quiz now!.</p>
-        </div>
-
-        <div class="col-sm-4 feature">
-            <div class="feature-icon feature-no-display feature-display-last">
-                <img class="bullet-img" src="/assets/images/design.svg">
-            </div>
-            <h5 class="feature-head-text feature-no-display feature-display-last"> HTML </h5>
-            <p class="feature-subtext light feature-no-display feature-display-last"> Try out a simple HTML Quiz now!.</p>
-        </div>
-    </div> <!--features-container-->
-</div> <!--features-section-->
 <!-- Pricing
   ================================================== -->
 <div id="pricing" class="pricing-background">
 
-    <h2 class="pricing-section-header light text-center">Quiz u done</h2>
-    <h4 class=" pricing-section-sub text-center light">Here quiz u just done</h4>
+    <h2 class="pricing-section-header light text-center">Pacchetti disponibili</h2>
+    <h4 class=" pricing-section-sub text-center light">Acquista un pacchetto per ottenere l'accesso</h4>
 
     <div class="pricing-table row">
         <div class="col-sm-4">

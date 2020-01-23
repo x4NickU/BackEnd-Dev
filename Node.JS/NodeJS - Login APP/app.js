@@ -3,14 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const mySQL = require('mysql')
 const MongoClient = require('mongodb').MongoClient;
 const passport = require('passport');
-const Strategy = require('passport-local').Strategy;
+const LocalStrategy   = require('passport-local').Strategy;
 const session = require('express-session');
 const flash = require('connect-flash');
 const authUtils = require('./utils/auth');
 const hbs = require('hbs');
+
+
+const sqlConnection = mySQL.createConnection({host: "localhost",user: "root",password: "",database: "db_1"});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -18,41 +21,49 @@ const authRouter = require('./routes/auth');
 
 var app = express();
 
-MongoClient.connect('mongodb+srv://Nick:mongodb1@cluster0-swldo.azure.mongodb.net/test?retryWrites=true&w=majority', (err,client) => {
-  if (err){
-    throw err;
-  }
-
-  const db = client.db('user-profiles');
-  const users = db.collection('users');
-  app.locals.users = users;
+sqlConnection.connect(function (err) {
+  if (err) throw err;
+  app.locals.users = sqlConnection;
 });
 
-passport.use(new Strategy(
-  (username, password,done) => {
-    app.locals.users.findOne({username}, (err,user) => {
-      if (err) {
-        return done(err);
-      }
 
-      if (!user) {
-        return done(null,false);
-      }
 
-      if(user.password != authUtils.hashPassword(password)) {
-        return done(null,false);
-      }
-
-      return done(null,user);
+passport.use('Login', new LocalStrategy(
+  (username,password,done) => {
+    app.locals.users.query('SELECT * FROM users WHERE username='+username+'', function (err, result) {
+        if (err) return done(null,false);
+        const checkPassword = authUtils.checkPassword(password,result.password);
+        if(!checkPassword) {
+          return done(null,false);
+        }
+      return done(null,result);
     });
   }
 ));
-passport.serializeUser((user, done) => {
-  done(null,user._id);
-});
 
-passport.deserializeUser((id, done) => {
-  done(null,{id});
+passport.use('Registration', new LocalStrategy(
+  (username, password,done) => {
+    app.locals.users.query('SELECT * FROM users WHERE username="'+username+'"', function (err, check) {
+        if (err) return done(null,false);
+        if (check) return done(null,false);
+        const hashpassword = authUtils.hashPassword(password);
+        var sql = 'INSERT INTO users(username,password) VALUES ("'+username+'", "'+hashpassword+'")';
+        app.locals.users.query(sql, function (err, result) {
+          if (err) console.log(err);
+          console.log("object: " + result);
+          return done(null, result);
+        });
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+		done(null, user._id);
+});
+passport.deserializeUser(function(id, done) {
+  app.locals.users.query("select * from users where id = "+id,function(err,result){	
+    done(err, result);
+  });
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
