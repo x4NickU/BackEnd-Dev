@@ -26,29 +26,22 @@ router.post('/register', (req,res,next) => {
         username : registrationParams.username,
         password : authUtils.hashPassword(registrationParams.password),
     };
-    users.findOne({username : payload.username}, (err, user) => {
-        var check = true;
-        if (err) {
-            check = false;
-        }
-        if (user) {
-            check = false;
-        }
-        if (check) {
-            users.insertOne(payload, (err) => {
-                if (err) {
-                    req.flash('error', 'User account already exists');
-                } else{
-                    req.flash('success', 'User account was registered successfully');
-                }
-                res.redirect('/auth/login');
-            });
-            
-        }else{
-            req.flash('error', 'User account already exists');
+    console.log("Hash: " + authUtils.hashPassword(registrationParams.password));
+    const userExist = authUtils.ifExistUsername(registrationParams.username,users);
+    console.log("User check: " + userExist);
+    if (userExist != 0) {
+        req.flash('error', 'User account already exists');
+        res.redirect('/auth/register');  
+    }else{
+        users.insertOne(payload, (err) => {
+            if (err) {
+                req.flash('error', 'User account already exists');
+            } else{
+                req.flash('success', 'User account was registered successfully');
+            }
             res.redirect('/auth/login');
-        }    
-    });
+        });
+    };
 });
 
 router.get('/logout', (req,res,next) => {

@@ -1,9 +1,13 @@
-const crypto = require('crypto');
+const bcrypto = require('bcrypt');
 
 const hashPassword = (plainText) => {
-    return crypto.createHmac('sha256', 'secret key')
-        .update(plainText)
-        .digest('hex');
+    return bcrypto.hashSync(plainText, 5);
 }
 
-module.exports = { hashPassword };
+const ifExistUsername = (username,users) => {
+    users.findOne({username: username}).then(res =>{
+        return res;
+    });
+}
+exports.hashPassword = hashPassword;
+exports.ifExistUsername = ifExistUsername;

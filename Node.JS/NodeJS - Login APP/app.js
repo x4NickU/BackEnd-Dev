@@ -18,7 +18,7 @@ const authRouter = require('./routes/auth');
 
 var app = express();
 
-MongoClient.connect('mongodb+srv://Nick:12345@cluster0-mau7b.mongodb.net/test?retryWrites=true&w=majority', (err,client) => {
+MongoClient.connect('mongodb+srv://Nick:mongodb1@cluster0-swldo.azure.mongodb.net/test?retryWrites=true&w=majority', (err,client) => {
   if (err){
     throw err;
   }
