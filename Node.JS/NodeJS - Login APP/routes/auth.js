@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const authUtils = require("../utils/auth");
 const passport = require('passport');
 
 router.get('/login',(req,res,next) => {
@@ -11,7 +10,7 @@ router.get('/login',(req,res,next) => {
 router.post('/login', passport.authenticate('Login',
   { failureRedirect: '/auth/login', 
     failureFlash: 'Wrong username or password'}), (req, res, next) => {
-    res.redirect('/users');
+    res.redirect('/');
 });
 
 router.get('/register', (req,res,next) => {

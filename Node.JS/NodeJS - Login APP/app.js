@@ -4,53 +4,78 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mySQL = require('mysql')
-const MongoClient = require('mongodb').MongoClient;
 const passport = require('passport');
 const LocalStrategy   = require('passport-local').Strategy;
 const session = require('express-session');
 const flash = require('connect-flash');
 const authUtils = require('./utils/auth');
 const hbs = require('hbs');
-
+const dateObj = new Date();
+const month = dateObj.getUTCMonth() + 1; //months from 1-12
+const day = dateObj.getUTCDate();
+const year = dateObj.getUTCFullYear();
 
 const sqlConnection = mySQL.createConnection({host: "localhost",user: "root",password: "",database: "db_1"});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-
+const appRouter = require('./routes/app');
 var app = express();
 
 sqlConnection.connect(function (err) {
   if (err) throw err;
   app.locals.users = sqlConnection;
 });
-
+app.locals.today = year + "/" + month + "/" + day;
 
 
 passport.use('Login', new LocalStrategy(
   (username,password,done) => {
-    app.locals.users.query('SELECT * FROM users WHERE username='+username+'', function (err, result) {
+    app.locals.users.query('SELECT * FROM users WHERE username="'+username+'"', function (err, result) {
         if (err) return done(null,false);
-        const checkPassword = authUtils.checkPassword(password,result.password);
+        if (!result.length) return done(null,false);
+        const checkPassword = authUtils.checkPassword(password,result[0].password);
         if(!checkPassword) {
           return done(null,false);
         }
-      return done(null,result);
+        var todayFormatted = app.locals.today.replace(/\//g, '');
+        var createFormatted = result[0].created_at.replace(/\//g, '');
+        console.log("Today: " + todayFormatted);
+        console.log("Created: " + createFormatted);
+        console.log("Check giorno: " + todayFormatted - createFormatted)
+        const dayCheck = ((todayFormatted - createFormatted)  > 14);
+        console.log("DayCkec: " + dayCheck);
+        if ((dayCheck) && result[0].payed == 1) app.locals.setUser = 'payed';
+        if ((dayCheck) && result[0].payed == 0) app.locals.setUser = 'need';
+        if ((!dayCheck) && result[0].payed == 0) app.locals.setUser = 'free';
+
+        console.log(result);
+      return done(null,result[0]);
     });
   }
 ));
 
-passport.use('Registration', new LocalStrategy(
-  (username, password,done) => {
+passport.use('Registration', new LocalStrategy({
+  passReqToCallback: true
+  },
+  (req, username, password, done) => { 
     app.locals.users.query('SELECT * FROM users WHERE username="'+username+'"', function (err, check) {
         if (err) return done(null,false);
-        if (check) return done(null,false);
+        if (check.length) return done(null,false);
         const hashpassword = authUtils.hashPassword(password);
-        var sql = 'INSERT INTO users(username,password) VALUES ("'+username+'", "'+hashpassword+'")';
-        app.locals.users.query(sql, function (err, result) {
-          if (err) console.log(err);
-          console.log("object: " + result);
+        var users = [
+          username,
+          hashpassword,
+          req.body.name,
+          req.body.subname,
+          req.body.email,
+          app.locals.today
+        ];
+
+        var sql = ('INSERT INTO users(username,password,name,subname,email,created_at) VALUES (?)');
+        app.locals.users.query(sql,[users], function (err, result, fields) {
+          if(err) console.log(err); 
           return done(null, result);
         });
     });
@@ -58,12 +83,12 @@ passport.use('Registration', new LocalStrategy(
 ));
 
 passport.serializeUser(function(user, done) {
-		done(null, user._id);
+  console.log("Serialize: " + user.ID);
+  done(null, user);
 });
-passport.deserializeUser(function(id, done) {
-  app.locals.users.query("select * from users where id = "+id,function(err,result){	
-    done(err, result);
-  });
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -90,6 +115,7 @@ app.use((req,res,next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/app', appRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

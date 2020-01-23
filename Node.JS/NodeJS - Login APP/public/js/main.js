@@ -28,19 +28,41 @@
     });
 
     function validate (input) {
-        if($(input).attr('type') == 'username' || $(input).attr('name') == 'username') {
-            if($(input).val().trim().match(/^[a-z0-9_@!-]{11,20}$/) == null) {
-                return true;
-            }else{
-                return false;
+        if(
+            $(input).attr('name') == 'name' || 
+            $(input).attr('name') == 'subname'
+            ) {
+                if($(input).val().trim().match(/^([a-z]{1,6}[ ']){0,3}([ÉÈÊËÜÛÎÔÄÏÖÄÅÇA-Z]{1}[éèëêüûçîôâïöäåa-z]{2,}[- ']){0,3}[A-Z]{1}[éèëêüûçîôâïöäåa-z]{2,}$/) == null) {
+                    return false;
+                }else{
+                    return true;
+                }
+            } else {
+                if($(input).val().trim() == ''){
+                    return false;
+                }
+        }              
+        if($(input).attr('name') == 'username') {
+                if($(input).val().trim().match(/[^A-Za-z0-9]/) == null) {
+                    return true;
+                }else{
+                    return false;
+                }
+            } else {
+                if($(input).val().trim() == ''){
+                    return false;
+                }
             }
-        } else {
-            if($(input).val().trim() == ''){
-                return false;
+            if($(input).attr('name') == 'email') {
+                if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+                    return false;
+            } else {
+                if($(input).val().trim() == ''){
+                    return false;
+                }
             }
-        }
+        }   
     }
-
     function showValidate(input) {
         var thisAlert = $(input).parent();
 
