@@ -46,18 +46,19 @@ function openForm(formID, composition) {
                 $('#' + formID).slideDown();
                 sessionStorage.setItem(formID, 'open');
                 break;
-                }
+            }
     }else{
         var _id = 'value' + formID;
         var test = sessionStorage.getItem(_id);
         var presetID = 'preset' + formID;
+        var brandID = 'brand' + formID;
         var formHTML = "<div id='"+formID+"' class='w-full dis-none js-show-service'>" +
         "<span style='font-size:16px'class='label-input100'>Form Name  "+test+"</span>" + 
         "<select style='margin-top:2em' name='"+presetID+"' id='"+presetID+"' class='form-control input-lg'>" + 
         "<option value=''>Select Preset</option>" + 
         "</select>" + 
         "<br />" + 
-        "<select name='brand' id='brand' class='form-control input-lg'> " +
+        "<select name='"+brandID+"' id='"+brandID+"' class='form-control input-lg'> " +
          "<option value=''>Select Brand</option>" +
         "</select>" + 
         "<br />" + 
@@ -88,9 +89,26 @@ function openForm(formID, composition) {
         totalNames.forEach(data => {
             html_code += '<option value="'+data+'">'+data+'</option>';
         });
-        console.log(html_code);
+        var selectPreset = document.getElementById(presetID);
+
+        selectPreset.onchange = () => {
+            setBrand(brandID,selectPreset,composition);
+        }
         $("#"+presetID+"").html(html_code);
     }
+}
+function setBrand(brandID,selectPreset,composition){
+    var selectValue = selectPreset.value;
+    var html_code = "";
+    console.log(selectValue);
+    composition.forEach(element => {
+        if(element.name == selectValue) {
+            element.set.forEach(brand => {
+                html_code += '<option value="'+brand[0]+'">'+brand[0]+'</option>';
+            })
+        }
+    });
+    $("#"+brandID+"").html(html_code);
 }
 
 // What's next? mh... mettere dropdown con contenuto tutte le composizioni, un altro per le marche, input mq(fatto bene), input costo /hr, finire il pulsante per il submit
