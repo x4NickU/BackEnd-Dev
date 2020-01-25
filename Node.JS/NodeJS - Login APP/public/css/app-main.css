@@ -13,7 +13,14 @@ span.choose {
   padding: 5px 0 10px;
   display: inherit
 }
-
+.pulsante {
+  width: 100%;
+  position: relative;
+  border: 1px solid #e6e6e6;
+  border-radius: 13px;
+  padding: 10px 30px 9px 22px;
+  margin-bottom: 20px;
+}
 /*Styling Selectbox*/
 .dropdown {
   width: 50%;

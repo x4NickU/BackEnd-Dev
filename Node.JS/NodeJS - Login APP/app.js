@@ -46,7 +46,8 @@ passport.use('Login', new LocalStrategy(
         console.log("Check giorno: " + todayFormatted - createFormatted)
         const dayCheck = ((todayFormatted - createFormatted)  > 14);
         console.log("DayCkec: " + dayCheck);
-        if ((dayCheck) && result[0].payed == 1) app.locals.setUser = 'payed';
+        console.log("Check state: " + result[0].payed)
+        if (result[0].payed == 1) app.locals.setUser = 'payed';
         if ((dayCheck) && result[0].payed == 0) app.locals.setUser = 'need';
         if ((!dayCheck) && result[0].payed == 0) app.locals.setUser = 'free';
 
