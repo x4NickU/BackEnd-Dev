@@ -15,28 +15,63 @@ router.post('/main', (req, res, next) => {
   }
 });
 
+/*
+Select Composition -> composition name -> marca -> #codici
+Select product -> #codici -> name,pricezzzzzzzzzzzzz<<
+*/
 router.get('/application', (req, res, next) => {
   if (!req.isAuthenticated()) {
     res.redirect('/auth/login');
   }
+  res.render('application')
+});
 
-  const _query = req.app.locals.users;
-  var set;
-  var array = [];
-  _query.query('SELECT * FROM composition', function (err, rows) {
-    rows.forEach(element => {
-      var full = {
-        name: element.name,
-        set : JSON.parse(element.set)
-      } 
-      array.push(full);
-    });
-
-    console.log(array);
+router.post('/application', (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    res.redirect('/auth/login');
+  }
+  if (req.body.case == 'select' )  {
+    const _query = req.app.locals.users;
+    var array = [];
+    _query.query('SELECT * FROM composition', function (err, rows) {
+      rows.forEach(element => {
+        var full = {
+          name: element.name,
+          set : JSON.parse(element.set)
+        } 
+        array.push(full);
+      });
     var content = JSON.stringify(array)
-    console.log(array[0].name);
-    res.render('application', {obj: content})
-  });
+    res.send({ data : content});
+    });
+  }else if (req.body.case == 'getProducts' )  {
+    const _query = req.app.locals.users;
+    var productsArray = [];
+    var items = JSON.parse(req.body.items);
+    console.log(items);
+    _query.query('SELECT * FROM products WHERE serial IN ('+items+')', function (err, rows) {
+      console.log("Righe: " + rows);
+        if (err) return;
+        if (!rows) return;
+        if (rows == null) return;
+
+        rows.forEach(item => {
+          console.log("Righe: " + item.name)
+          var obj = {
+            name: item.name,
+            serial: item.serial,
+            price: item.price
+          }
+          productsArray.push(obj);
+        })
+        var content = JSON.stringify(productsArray)
+        res.send({donuts : content});
+      });
+
+
+  }else{
+    res.render('application');
+  }
 });
 
 module.exports = router;

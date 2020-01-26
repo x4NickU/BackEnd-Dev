@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-25 09:00:14
+Date: 2020-01-26 11:54:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,8 +29,8 @@ CREATE TABLE `composition` (
 -- ----------------------------
 -- Records of composition
 -- ----------------------------
-INSERT INTO `composition` VALUES ('1', 'Zaino1', '[[\"marca\",\"codiice1\",\"codice2\"],[\"marca\",\"codiice1\",\"codice2\"]]');
-INSERT INTO `composition` VALUES ('2', 'Zaino2', '[[\"marca1\",\"codiice1\",\"codice2\"],[\"marca2\",\"codiice1\",\"codice2\"]]');
+INSERT INTO `composition` VALUES ('1', 'Zaino1', '[[\"marca\",\"55556\",\"55557\"],[\"marca1\",\"Zaino12\",\"Zaino12\"]]');
+INSERT INTO `composition` VALUES ('2', 'Zaino2', '[[\"marca1\",\"Zaino1\",\"Zaino1\"],[\"marca2\",\"Zaino2\",\"Zaino2\"]]');
 
 -- ----------------------------
 -- Table structure for `products`
