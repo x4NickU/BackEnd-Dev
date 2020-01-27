@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-26 11:54:57
+Date: 2020-01-27 13:16:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `serial` varchar(255) DEFAULT NULL,
-  `price` varchar(255) DEFAULT NULL,
+  `price` float(10,5) DEFAULT 0.00000,
   `name` varchar(255) DEFAULT NULL,
   `brand` varchar(255) DEFAULT NULL,
   `series` varchar(255) DEFAULT NULL,
@@ -49,8 +49,8 @@ CREATE TABLE `products` (
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES ('1', '55556', '1.20', 'Uno', 'Uno', 'Uno');
-INSERT INTO `products` VALUES ('2', '55557', '3.20', 'Due', 'Uno', 'Uno');
+INSERT INTO `products` VALUES ('1', '55556', '1.20000', 'Uno', 'Uno', 'Uno');
+INSERT INTO `products` VALUES ('2', '55557', '1.20000', 'Due', 'Uno', 'Uno');
 
 -- ----------------------------
 -- Table structure for `users`
