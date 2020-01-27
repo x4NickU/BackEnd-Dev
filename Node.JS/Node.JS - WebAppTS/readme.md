@@ -1,1 +1,0 @@
-NodeJS, ExpressJS, TypeScript, ReactJS
