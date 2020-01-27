@@ -51,9 +51,10 @@ router.post('/application', (req, res, next) => {
     console.log(items);
     _query.query('SELECT * FROM products WHERE serial IN ('+items+')', function (err, rows) {
       console.log("Righe: " + rows);
-        if (err) return;
-        if (!rows) return;
-        if (rows == null) return;
+      if (err) {res.send({donuts : "empty"});return};
+        if (!rows) {res.send({donuts : "empty"});return};
+        if (rows == null) {res.send({donuts : "empty"});return};
+
 
         rows.forEach(item => {
           console.log("Righe: " + item.name)
