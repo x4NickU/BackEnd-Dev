@@ -2,7 +2,7 @@
  
 Certifications: 
 
-Responsive Web Design: 
+Responsive Web Design: https://www.freecodecamp.org/certification/nick_420/responsive-web-design
 
 JavaScript Algorithms and Data Structures: https://www.freecodecamp.org/certification/nick_420/javascript-algorithms-and-data-structures
 
