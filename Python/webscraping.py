@@ -58,4 +58,3 @@ for query in lista_siti:
     time.sleep(0.5)
 
 
-

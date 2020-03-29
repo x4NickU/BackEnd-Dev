@@ -1,0 +1,13 @@
+wp-content\plugins\buddypress\bp-core\classes\class-bp-user-query.php
+linea 353: {
+	default :
+	$this->uid_name = 'user_id';
+	$sql['select']  = "SELECT ID, moneySpent FROM wp_deeplosystem";
+	$sql['orderby'] = "ORDER BY moneySpent";
+	$sql['order'] = "DESC";
+	break;
+}
+
+
+wp-content\plugins\unyson\framework\extensions\sign-form\views\vcard.php
+wp-content\plugins\youzer\includes\public\core\class-yz-header
