@@ -17,6 +17,7 @@ class App extends Component {
 	}
 
 	setupWeb3() {
+		
 		if(window.web3) {
 			this.web3 = new Web3(window.web3.currentProvider);
 			window.ethereum.enable();
@@ -189,9 +190,19 @@ class App extends Component {
 		}
 	}
 
-	_sendMoney() {
+	_sendMoney(event) {
+		var regExp = RegExp('^[0-9.]*$');
+
+		if(this.state.value == "" || this.state.value == 0 ) {
+			document.getElementById("Status").innerText = "Error: can't be 0 or null";
+			return;
+		}
+		if (!regExp.test(this.state.value)) {
+			document.getElementById("Status").innerText = "Error: only numbers!";
+			return;
+		}
 		window.ethereum.enable();
-		this.smartContract.sendMoney({value: web3.toWei(1, 'ether')}, (err,result) => {
+		this.smartContract.sendMoney((web3.toWei(this.state.value, 'ether')),(err,result) => {
 			if (err) console.log(err);
 			console.log(result);
 		});
@@ -203,9 +214,17 @@ class App extends Component {
 	  }
 
 	_addMoney(event) {
-		alert(this.state.value);
+		var regExp = RegExp('^[0-9.]*$');
+		if(this.state.value == "" || this.state.value == 0 ) {
+			document.getElementById("Status").innerText = "Error: can't be 0 or null";
+			return;
+		}
+		if (!regExp.test(this.state.value)) {
+			document.getElementById("Status").innerText = "Error: only numbers!";
+			return;
+		}
 		window.ethereum.enable();
-		this.smartContract.addMoney({value: web3.toWei(1, 'ether')}, (err,result) => {
+		this.smartContract.addMoney({value: web3.toWei(this.state.value, 'ether')}, (err,result) => {
 			if (err) console.log(err);
 			console.log(result);
 		});
@@ -235,12 +254,12 @@ class App extends Component {
 		  	<p id="eth_balance">ETH Balance : Wait...</p>
 		  	<p id="smart_balance">SmartContract Balance: Wait....</p>
 		  	<p id="Status"></p>
-		  	<div class="form__group field">
-  				<input type="input" class="form__field" placeholder="Money to send" name="name" id='name' required />
-  				<label for="name" class="form__label">Money to send</label>
+		  	<div className="form__group field">
+  				<input type="input" className="form__field" placeholder="Amount to send" name="name" id='name' required value={this.state.value} onChange={this.handleChange} />
+  				<label for="name" className="form__label">Amount to send</label>
 			</div>
+		  	<button onClick={this.sendMoney} className="nickBtn btn tm-btn tm-font-big">Pay Workers</button> 
 		  	<button onClick={this.addMoney} className="nickBtn btn tm-btn tm-font-big"> Add Money </button>
-		  	<a href="#" onClick={this.sendMoney} title={descr_2} className="nickBtn btn tm-btn tm-font-big" data-nav-link="#tmNavLink2">Pay Workers</a> 
 		  	<a href="#" onClick={this.getLastVersion} style={{padding: "5px 30px", marginTop: "2em"}} title={descr_3} className="btn tm-btn tm-font-big" data-nav-link="#tmNavLink2">Get last Version</a> 
 	  	</div>
     );
