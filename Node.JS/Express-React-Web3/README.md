@@ -5,7 +5,6 @@ want to try it?
 download metamask or some other eth provider and try it!
 
 Financer: 
- - Private Key: f07a6e81c473fa25e53ab47b47885b0c6a62033484929785b0cef8a021880e9b
  - Address: 0xf7aAFA535a8C687d9bdba9Fc3E8e79FE4cBb666E
  - Money: 4.5ETH
 
